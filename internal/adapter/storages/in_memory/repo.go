@@ -1,8 +1,12 @@
 package in_memory
 
+import (
+	"sync"
+)
+
 type Repo struct {
 	data map[string]string
-	//mu   sync.Mutex
+	mu   sync.RWMutex
 }
 
 func NewRepo() *Repo {
