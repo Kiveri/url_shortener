@@ -3,8 +3,8 @@ package sevice_provider
 import (
 	"context"
 
-	"url/internal/adapter/storages/in_memory"
-	"url/internal/adapter/storages/postgres"
+	"url/internal/adapter/storage/in_memory"
+	"url/internal/adapter/storage/postgres"
 )
 
 func (sp *ServiceProvider) getURLRepositoryInMem() *in_memory.Repo {
@@ -17,7 +17,7 @@ func (sp *ServiceProvider) getURLRepositoryInMem() *in_memory.Repo {
 
 func (sp *ServiceProvider) getURLRepositoryDb() *postgres.Repo {
 	if sp.urlRepoDb == nil {
-		sp.urlRepoDb = postgres.NewRepoDb(sp.getDbCluster(context.Background()))
+		sp.urlRepoDb = postgres.NewRepo(sp.getDbCluster(context.Background()))
 	}
 
 	return sp.urlRepoDb

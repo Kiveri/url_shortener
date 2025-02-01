@@ -12,7 +12,7 @@ type Repo struct {
 	cluster *config.Cluster
 }
 
-func NewRepoDb(cluster *config.Cluster) *Repo {
+func NewRepo(cluster *config.Cluster) *Repo {
 	return &Repo{
 		cluster: cluster,
 	}

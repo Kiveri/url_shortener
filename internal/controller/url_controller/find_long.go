@@ -4,7 +4,7 @@ import (
 	"errors"
 	"net/http"
 
-	"url/internal/adapter/storages/postgres"
+	"url/internal/adapter/storage/postgres"
 	"url/internal/controller"
 	"url/internal/usecase"
 )

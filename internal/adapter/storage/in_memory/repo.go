@@ -5,11 +5,12 @@ import (
 )
 
 type Repo struct {
-	data map[string]string
+	urls map[string]string
 	mu   sync.RWMutex
 }
 
 func NewRepo() *Repo {
 	return &Repo{
-		data: make(map[string]string)}
+		urls: make(map[string]string),
+	}
 }
