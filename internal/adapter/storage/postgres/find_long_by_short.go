@@ -5,21 +5,28 @@ import (
 	"errors"
 	"fmt"
 
+	"url/internal/adapter/storage"
+	"url/internal/domain/model"
+
 	"github.com/jackc/pgx/v5"
 )
 
-func (r *Repo) FindByShortUrl(shortUrl string) (string, error) {
-	query := `SELECT long_url FROM urls WHERE short_url = $1`
-	var longURL string
+func (r *Repo) FindByShortUrl(shortUrl string) (*model.URL, error) {
+	var url model.URL
 
-	err := r.cluster.Conn.QueryRow(context.Background(), query, shortUrl).Scan(&longURL)
+	query := `SELECT long_url FROM urls WHERE short_url = $1`
+
+	err := r.cluster.Conn.QueryRow(context.Background(), query,
+		shortUrl,
+	).Scan(&url.LongUrl)
+
 	if err != nil {
 		if errors.Is(err, pgx.ErrNoRows) {
-			return "", NotFound
+			return nil, storage.NotFound
 		}
 
-		return "", fmt.Errorf("FindClient: %w", err)
+		return nil, fmt.Errorf("FindClient: %w", err)
 	}
 
-	return longURL, nil
+	return &url, nil
 }

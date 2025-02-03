@@ -1,17 +1,19 @@
 package in_memory
 
 import (
-	"fmt"
+	"url/internal/adapter/storage"
+	"url/internal/domain/model"
 )
 
-func (r *Repo) FindByShortUrl(shortUrl string) (string, error) {
+func (r *Repo) FindByShortUrl(shortUrl string) (*model.URL, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 
-	longURL, exists := r.urls[shortUrl]
+	longUrl, exists := r.urls[shortUrl]
 	if !exists {
-		return "", fmt.Errorf("hash %s not found", shortUrl)
+		return nil, storage.NotFound
 	}
+	url := model.NewURL(shortUrl, longUrl)
 
-	return longURL, nil
+	return url, nil
 }

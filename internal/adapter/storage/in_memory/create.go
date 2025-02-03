@@ -1,14 +1,18 @@
 package in_memory
 
-func (r *Repo) CreateShortUrl(shortUrl, longUrl string) (string, error) {
+import (
+	"url/internal/domain/model"
+)
+
+func (r *Repo) CreateShortUrl(url *model.URL) (*model.URL, error) {
 	r.mu.Lock()
 	defer r.mu.Unlock()
 
-	if _, ok := r.urls[shortUrl]; ok {
-		return shortUrl, nil
+	if _, ok := r.urls[url.ShortUrl]; ok {
+		return url, nil
 	} else {
-		r.urls[shortUrl] = longUrl
+		r.urls[url.ShortUrl] = url.LongUrl
 	}
 
-	return shortUrl, nil
+	return url, nil
 }

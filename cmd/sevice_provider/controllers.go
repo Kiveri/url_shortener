@@ -6,7 +6,7 @@ import (
 
 func (sp *ServiceProvider) GetUrlsController() *url_controller.Controller {
 	if sp.urlController == nil {
-		sp.urlController = url_controller.NewController(sp.GetUrlUseCase())
+		sp.urlController = url_controller.NewController(sp.GetUrlUseCase(), sp.conf.BaseUrl)
 	}
 
 	return sp.urlController

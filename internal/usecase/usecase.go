@@ -1,8 +1,12 @@
 package usecase
 
+import (
+	"url/internal/domain/model"
+)
+
 type urlRepo interface {
-	CreateShortUrl(shortUrl, longURL string) (string, error)
-	FindByShortUrl(shortUrl string) (string, error)
+	CreateShortUrl(url *model.URL) (*model.URL, error)
+	FindByShortUrl(shortUrl string) (*model.URL, error)
 }
 
 type UrlUseCase struct {
