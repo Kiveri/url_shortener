@@ -32,7 +32,7 @@ func (c *Controller) CreateShortUrl(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	shortUrl, err := c.urlsUseCase.CreateShortUrl(usecase.CreateShortURLReq{
+	shortUrl, err := c.urlsUseCase.CreateUrl(usecase.CreateUrlReq{
 		LongURL: req.LongUrl,
 	})
 	if err != nil {

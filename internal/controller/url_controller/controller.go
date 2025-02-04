@@ -12,8 +12,8 @@ type (
 	}
 
 	urlsUseCase interface {
-		CreateShortUrl(req usecase.CreateShortURLReq) (*model.URL, error)
-		FindByShortUrl(req usecase.FindLongReq) (*model.URL, error)
+		CreateUrl(req usecase.CreateUrlReq) (*model.URL, error)
+		FindUrl(req usecase.FindUrlReq) (*model.URL, error)
 	}
 )
 

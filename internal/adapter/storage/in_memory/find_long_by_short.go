@@ -5,7 +5,7 @@ import (
 	"url/internal/domain/model"
 )
 
-func (r *Repo) FindByShortUrl(shortUrl string) (*model.URL, error) {
+func (r *Repo) FindUrl(shortUrl string) (*model.URL, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 

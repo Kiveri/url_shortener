@@ -15,7 +15,7 @@ type findLongUrlResponse struct {
 
 func (c *Controller) FindLongUrl(w http.ResponseWriter, r *http.Request) {
 	shortUrl := r.URL.Path[1:]
-	longUrl, err := c.urlsUseCase.FindByShortUrl(usecase.FindLongReq{
+	longUrl, err := c.urlsUseCase.FindUrl(usecase.FindUrlReq{
 		ShortUrl: shortUrl,
 	})
 	if err != nil {

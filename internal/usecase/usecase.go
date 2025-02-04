@@ -5,8 +5,8 @@ import (
 )
 
 type urlRepo interface {
-	CreateShortUrl(url *model.URL) (*model.URL, error)
-	FindByShortUrl(shortUrl string) (*model.URL, error)
+	CreateUrl(url *model.URL) (*model.URL, error)
+	FindUrl(shortUrl string) (*model.URL, error)
 }
 
 type UrlUseCase struct {

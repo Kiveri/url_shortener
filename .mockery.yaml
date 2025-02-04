@@ -1,0 +1,16 @@
+resolve-type-alias: False
+issue-845-fix: True
+exported: True
+with-expecter: True
+quiet: False
+keeptree: False
+mockname: "{{.InterfaceName | camelcase| firstUpper}}"
+outpkg: mocks
+filename: "{{.InterfaceName | snakecase}}.go"
+dir: "{{.InterfaceDir}}/mocks"
+packages:
+  url/internal/usecase:
+    config:
+      include-regex: ".*"
+      recursive: True
+

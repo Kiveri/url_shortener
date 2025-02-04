@@ -25,14 +25,14 @@ func NewConfig() *Config {
 	}
 	baseUrl := os.Getenv("BASE_URL")
 	if baseUrl == "" {
-		baseUrl = "http://localhost/"
+		baseUrl = "http://localhost:8080/"
 	}
 
 	storageType := flag.String("storage", "postgresql", "Тип хранилища (in-memory или postgresql)")
 	flag.Parse()
 
 	if *storageType != "postgresql" && *storageType != "in-memory" {
-		panic("данный тип не але")
+		panic("only postgresql and in-memory storages are supported")
 	}
 	return &Config{
 		DatabaseType: *storageType,

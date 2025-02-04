@@ -4,7 +4,7 @@ import (
 	"url/internal/domain/model"
 )
 
-func (r *Repo) CreateShortUrl(url *model.URL) (*model.URL, error) {
+func (r *Repo) CreateUrl(url *model.URL) (*model.URL, error) {
 	r.mu.Lock()
 	defer r.mu.Unlock()
 

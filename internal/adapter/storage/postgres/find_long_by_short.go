@@ -11,7 +11,7 @@ import (
 	"github.com/jackc/pgx/v5"
 )
 
-func (r *Repo) FindByShortUrl(shortUrl string) (*model.URL, error) {
+func (r *Repo) FindUrl(shortUrl string) (*model.URL, error) {
 	var url model.URL
 
 	query := `SELECT long_url FROM urls WHERE short_url = $1`
@@ -25,7 +25,7 @@ func (r *Repo) FindByShortUrl(shortUrl string) (*model.URL, error) {
 			return nil, storage.NotFound
 		}
 
-		return nil, fmt.Errorf("FindClient: %w", err)
+		return nil, fmt.Errorf("FindUrl: %w", err)
 	}
 
 	return &url, nil
