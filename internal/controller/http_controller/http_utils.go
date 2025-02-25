@@ -1,8 +1,10 @@
-package controller
+package http_controller
 
 import (
 	"encoding/json"
 	"net/http"
+
+	"url/internal/controller"
 )
 
 func Respond(w http.ResponseWriter, status int, payload interface{}) {
@@ -13,7 +15,7 @@ func Respond(w http.ResponseWriter, status int, payload interface{}) {
 	}
 }
 
-func ValidationErrorRespond(w http.ResponseWriter, validationError *ValidationError) {
+func ValidationErrorRespond(w http.ResponseWriter, validationError *controller.ValidationError) {
 	Respond(w, http.StatusBadRequest, validationError)
 }
 
@@ -21,6 +23,6 @@ func InternalServerErrorRespond(w http.ResponseWriter, err error) {
 	http.Error(w, err.Error(), http.StatusInternalServerError)
 }
 
-func NotFoundErrorRespond(w http.ResponseWriter, notFoundError *NotFoundError) {
+func NotFoundErrorRespond(w http.ResponseWriter, notFoundError *controller.NotFoundError) {
 	Respond(w, http.StatusNotFound, notFoundError)
 }

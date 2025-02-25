@@ -12,6 +12,7 @@ import (
 type Config struct {
 	DatabaseType string
 	BaseUrl      string
+	TgBotToken   string
 }
 
 func NewConfig() *Config {
@@ -28,6 +29,11 @@ func NewConfig() *Config {
 		baseUrl = "http://localhost:8080/"
 	}
 
+	tgBotToken := os.Getenv("TELEGRAM_BOT_TOKEN")
+	if tgBotToken == "" {
+		panic("TELEGRAM_BOT_TOKEN environment variable not set")
+	}
+
 	storageType := flag.String("storage", "postgresql", "Тип хранилища (in-memory или postgresql)")
 	flag.Parse()
 
@@ -37,6 +43,7 @@ func NewConfig() *Config {
 	return &Config{
 		DatabaseType: *storageType,
 		BaseUrl:      baseUrl,
+		TgBotToken:   tgBotToken,
 	}
 
 }

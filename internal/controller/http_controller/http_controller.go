@@ -1,4 +1,4 @@
-package url_controller
+package http_controller
 
 import (
 	"url/internal/domain/model"
@@ -6,7 +6,7 @@ import (
 )
 
 type (
-	Controller struct {
+	HttpController struct {
 		urlsUseCase urlsUseCase
 		baseUrl     string
 	}
@@ -17,8 +17,8 @@ type (
 	}
 )
 
-func NewController(urlsUseCase urlsUseCase, baseUrl string) *Controller {
-	return &Controller{
+func NewController(urlsUseCase urlsUseCase, baseUrl string) *HttpController {
+	return &HttpController{
 		urlsUseCase: urlsUseCase,
 		baseUrl:     baseUrl,
 	}

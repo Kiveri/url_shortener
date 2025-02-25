@@ -1,4 +1,4 @@
-package url_controller
+package http_controller
 
 import (
 	"errors"
@@ -13,22 +13,22 @@ type findLongUrlResponse struct {
 	LongUrl string `json:"long_url"`
 }
 
-func (c *Controller) FindLongUrl(w http.ResponseWriter, r *http.Request) {
+func (c *HttpController) FindLongUrl(w http.ResponseWriter, r *http.Request) {
 	shortUrl := r.URL.Path[1:]
 	longUrl, err := c.urlsUseCase.FindUrl(usecase.FindUrlReq{
 		ShortUrl: shortUrl,
 	})
 	if err != nil {
 		if errors.Is(err, storage.NotFound) {
-			controller.NotFoundErrorRespond(w, controller.NewNotFoundError("not found"))
+			NotFoundErrorRespond(w, controller.NewNotFoundError("not found"))
 
 			return
 		}
 
-		controller.InternalServerErrorRespond(w, err)
+		InternalServerErrorRespond(w, err)
 
 		return
 	}
 
-	controller.Respond(w, http.StatusOK, findLongUrlResponse{LongUrl: longUrl.LongUrl})
+	Respond(w, http.StatusOK, findLongUrlResponse{LongUrl: longUrl.LongUrl})
 }
