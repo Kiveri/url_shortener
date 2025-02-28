@@ -8,10 +8,12 @@ services:
       - db
     env_file:
       - .env
+    networks:
+      - app-network
     restart: always
 
   db:
-    image: postgres:17-alpine
+    image: postgres:16-alpine
     container_name: postgres_db
     environment:
       POSTGRES_USER: postgres
@@ -32,49 +34,3 @@ networks:
   app-network:
 
 #  docker-compose up
-
-#services:
-#  # Сервис для PostgreSQL
-#  db:
-#    image: postgres:17
-#    container_name: postgres_db
-#    environment:
-#      POSTGRES_USER: postgres
-#      POSTGRES_PASSWORD: 10Denis00
-#      POSTGRES_DB: postgres
-#    ports:
-#      - "5432:5432"
-#    volumes:
-#      - postgres_data:/var/lib/postgresql/data
-#    networks:
-#      - app-network
-#
-#  # Сервис для вашего Go-приложения
-#  app:
-#    build:
-#      context: .
-#      dockerfile: Dockerfile
-#    container_name: go_app
-#    environment:
-#      DB_HOST: postgres_db
-#      DB_PORT: 5432
-#      POSTGRES_USER: postgres
-#      POSTGRES_PASSWORD: 10Denis00
-#      POSTGRES_DB: postgres
-#      POSTGRES_SSL_MODE: disable
-#    ports:
-#      - "8080:8080"
-#    depends_on:
-#      - db
-#    env_file:
-#      - .env
-#    networks:
-#      - app-network
-#
-## Настройка volumes и networks
-#volumes:
-#  postgres_data:
-#
-#networks:
-#  app-network:
-#    driver: bridge

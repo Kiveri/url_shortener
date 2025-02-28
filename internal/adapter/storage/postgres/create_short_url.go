@@ -8,7 +8,7 @@ import (
 )
 
 func (r *Repo) CreateUrl(url *model.URL) (*model.URL, error) {
-	query := `INSERT INTO urls (short_url, long_url) VALUES ($1, $2) ON CONFLICT (long_url) DO NOTHING;`
+	query := `INSERT INTO urls (short_url, long_url) VALUES ($1, $2) ON CONFLICT (short_url) DO NOTHING;`
 
 	_, err := r.cluster.Conn.Exec(context.Background(), query,
 		url.ShortUrl,
