@@ -4,7 +4,6 @@ import (
 	"flag"
 	"log"
 	"os"
-	"path/filepath"
 
 	"github.com/joho/godotenv"
 )
@@ -15,17 +14,12 @@ type Config struct {
 }
 
 func NewConfig() *Config {
-	pwd, err := os.Getwd()
-	if err != nil {
-		panic(err)
-	}
-
-	if err = godotenv.Load(filepath.Join(pwd, "../.env")); err != nil {
+	if err := godotenv.Load(".env"); err != nil {
 		log.Println("failed to load .env file")
 	}
 	baseUrl := os.Getenv("BASE_URL")
 	if baseUrl == "" {
-		baseUrl = "http://localhost:8080/"
+		baseUrl = "http://localhost:8088/"
 	}
 
 	storageType := flag.String("storage", "postgresql", "Тип хранилища (in-memory или postgresql)")
