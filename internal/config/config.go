@@ -19,7 +19,7 @@ func NewConfig() *Config {
 	}
 	baseUrl := os.Getenv("BASE_URL")
 	if baseUrl == "" {
-		baseUrl = "http://localhost:8080/"
+		baseUrl = "http://localhost:8088/"
 	}
 
 	storageType := flag.String("storage", "postgresql", "Тип хранилища (in-memory или postgresql)")
