@@ -1,11 +1,10 @@
-package url_controller
+package http_controller
 
 import (
 	"errors"
 	"net/http"
 
 	"url/internal/adapter/storage"
-	"url/internal/controller"
 	"url/internal/usecase"
 )
 
@@ -20,15 +19,15 @@ func (c *Controller) FindLongUrl(w http.ResponseWriter, r *http.Request) {
 	})
 	if err != nil {
 		if errors.Is(err, storage.NotFound) {
-			controller.NotFoundErrorRespond(w, controller.NewNotFoundError("not found"))
+			NotFoundErrorRespond(w, NewNotFoundError("not found"))
 
 			return
 		}
 
-		controller.InternalServerErrorRespond(w, err)
+		InternalServerErrorRespond(w, err)
 
 		return
 	}
 
-	controller.Respond(w, http.StatusOK, findLongUrlResponse{LongUrl: longUrl.LongUrl})
+	Respond(w, http.StatusOK, findLongUrlResponse{LongUrl: longUrl.LongUrl})
 }

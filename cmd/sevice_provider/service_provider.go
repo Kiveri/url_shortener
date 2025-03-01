@@ -4,7 +4,7 @@ import (
 	"url/internal/adapter/storage/in_memory"
 	"url/internal/adapter/storage/postgres"
 	"url/internal/config"
-	"url/internal/controller/url_controller"
+	"url/internal/controller/http_controller"
 	"url/internal/usecase"
 )
 
@@ -13,7 +13,7 @@ type ServiceProvider struct {
 	urlUseCase    *usecase.UrlUseCase
 	urlRepoInMem  *in_memory.Repo
 	urlRepoDb     *postgres.Repo
-	urlController *url_controller.Controller
+	urlController *http_controller.Controller
 	conf          *config.Config
 }
 

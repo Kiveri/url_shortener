@@ -1,4 +1,4 @@
-package url_controller
+package http_controller
 
 import (
 	"url/internal/domain/model"

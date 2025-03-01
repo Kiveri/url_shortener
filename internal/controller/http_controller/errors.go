@@ -1,4 +1,4 @@
-package controller
+package http_controller
 
 type ValidationError struct {
 	Message   string `json:"message"`
