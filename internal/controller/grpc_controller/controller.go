@@ -1,12 +1,15 @@
-package url_controller
+package grpc_controller
 
 import (
 	"url/internal/domain/model"
+	urlshortener "url/internal/pb/url_shortener"
+
 	"url/internal/usecase"
 )
 
 type (
 	Controller struct {
+		urlshortener.UnimplementedUrlShortenerServer
 		urlsUseCase urlsUseCase
 		baseUrl     string
 	}

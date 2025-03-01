@@ -1,10 +1,9 @@
-package url_controller
+package http_controller
 
 import (
 	"encoding/json"
 	"net/http"
 
-	"url/internal/controller"
 	"url/internal/usecase"
 )
 
@@ -21,13 +20,13 @@ func (c *Controller) CreateShortUrl(w http.ResponseWriter, r *http.Request) {
 	var req createShortUrlRequest
 	err := decoder.Decode(&req)
 	if err != nil {
-		controller.InternalServerErrorRespond(w, err)
+		InternalServerErrorRespond(w, err)
 
 		return
 	}
 
 	if validationError := validateCreateShortUrlRequest(req); validationError != nil {
-		controller.ValidationErrorRespond(w, validationError)
+		ValidationErrorRespond(w, validationError)
 
 		return
 	}
@@ -36,17 +35,17 @@ func (c *Controller) CreateShortUrl(w http.ResponseWriter, r *http.Request) {
 		LongURL: req.LongUrl,
 	})
 	if err != nil {
-		controller.InternalServerErrorRespond(w, err)
+		InternalServerErrorRespond(w, err)
 
 		return
 	}
 
-	controller.Respond(w, http.StatusOK, createShortUrlResponse{ShortUrl: c.baseUrl + shortUrl.ShortUrl})
+	Respond(w, http.StatusOK, createShortUrlResponse{ShortUrl: c.baseUrl + shortUrl.ShortUrl})
 }
 
-func validateCreateShortUrlRequest(req createShortUrlRequest) *controller.ValidationError {
+func validateCreateShortUrlRequest(req createShortUrlRequest) *ValidationError {
 	if req.LongUrl == "" {
-		return controller.NewValidationError("url is required", "long_url")
+		return NewValidationError("url is required", "long_url")
 	}
 
 	return nil
