@@ -6,3 +6,6 @@ migrate-create:
 
 lint:
 	golangci-lint run ./...
+
+protoc-go-gen:
+	protoc --go_out=. --go-grpc_out=. .\API\url_shortener.proto
